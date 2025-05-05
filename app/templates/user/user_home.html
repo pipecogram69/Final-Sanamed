@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='auth/saludmental1.ico') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user/style2.css') }}">
+    <title>Sanamed - Software de Salud Mental</title>
+</head>
+<body>
+
+  <h1 class="titulo-centrado">SANAMED</h1>
+  <img src="{{ url_for('static', filename='auth/rectangle 6.png') }}" alt="Imagen Superior" class="imagen-superior">
+  <img src="{{ url_for('static', filename='auth/saludmental1.png') }}" alt="Imagen Esquina Izquierda" class="imagen-esquinai izquierda">
+
+  <div class="menu-container">
+      <img src="{{ url_for('static', filename='auth/saludmental1.png') }}" alt="Imagen Esquina Derecha" class="imagen-esquinad derecha" id="menu-toggle">
+      <div class="menu-dropdown" id="menu-dropdown">
+          <a href="{{ url_for('user.configuracion') }}">Configuración</a>
+          <a href="{{ url_for('auth.logout') }}">Cerrar Sesión</a>
+      </div>
+  </div>
+
+  <div class="settings-v-1">
+    <div class="wrapper-">
+        <div class="salud-mental-1" title="Imagen ilustrativa sobre salud mental"></div>
+        <div class="frame-6">
+            <span class="sanamed" title="SANAMED: Sanamed es un software de salud mental que ofrece una variedad de servicios y herramientas para mejorar el bienestar emocional y la salud mental de los usuarios."></span>
+        </div>
+    </div>  
+    <div class="container">
+        <div class="group-73" title="Estado emocional">
+            <div class="how-are-you-feeling-today" title="¿Cómo te sientes hoy?">
+                ¿Cómo te sientes hoy?
+            </div>
+            <div class="flash-messages">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="flash-message {{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            
+            <div class="group-81">
+                <div class="happy">
+                    <div class="wrapper-5">
+                        <div class="happy-1">
+                            <form action="{{ url_for('user.registro_emocion') }}" method="POST">
+                                <input type="hidden" name="emocion" value="Feliz">
+                                <button type="submit" class="emocion-button" title="Seleccionar Feliz">
+                                    <img class="vector-7" src="{{ url_for('static', filename='user/Happy.png') }}" alt="Icono de Feliz" />
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <span class="feliz" title="Feliz">Feliz</span>
+                </div>
+                <div class="calm">
+                    <div class="wrapper-4">
+                        <div class="calm-1">
+                            <form action="{{ url_for('user.registro_emocion') }}" method="POST">
+                                <input type="hidden" name="emocion" value="Calmado">
+                                <button type="submit" class="emocion-button" title="Seleccionar Calmado">
+                                    <img class="vector-7" src="{{ url_for('static', filename='user/Calm - Icon.png') }}" alt="Icono de Calmado" />
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <span class="calmado" title="Calmado">Calmado</span>
+                </div>
+                <div class="relax">
+                    <div class="wrapper-6">
+                        <div class="relax-1">
+                            <form action="{{ url_for('user.registro_emocion') }}" method="POST">
+                                <input type="hidden" name="emocion" value="Relajado">
+                                <button type="submit" class="emocion-button" title="Seleccionar Relajado">
+                                    <img class="vector-7" src="{{ url_for('static', filename='user/Relax.png') }}" alt="Icono de Relajado" />
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <span class="relajado" title="Relajado">Relajado</span>
+                </div>
+                <div class="focus">
+                    <div class="wrapper-7">
+                        <div class="focus-1">
+                            <form action="{{ url_for('user.registro_emocion') }}" method="POST">
+                                <input type="hidden" name="emocion" value="Enojado">
+                                <button type="submit" class="emocion-button" title="Seleccionar Enojado">
+                                    <img class="vector-7" src="{{ url_for('static', filename='user/Vector.png') }}" alt="Icono de Enojado" />
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <span class="enojado" title="Enojado">Enojado</span>
+                </div>
+                <div class="focus-mood">
+                    <div class="wrapper-8">
+                        <div class="focus-mood-1">
+                            <form action="{{ url_for('user.registro_emocion') }}" method="POST">
+                                <input type="hidden" name="emocion" value="Triste">
+                                <button type="submit" class="emocion-button" title="Seleccionar Triste">
+                                    <img class="vector-7" src="{{ url_for('static', filename='user/Vector.png') }}" alt="Icono de Triste" />
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <span class="triste" title="Triste">Triste</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="settings-v-1">
+          <div class="wrapper-2">
+              <a href="https://open.spotify.com/playlist/5xXpUY3henFlcPt86jJrqh?si=c6880e4269eb4dd1" class="feature-card">
+                  <div class="frame-10">
+                      <div class="image-7">
+                          <img src="{{ url_for('static', filename='user/image 7.png') }}" alt="Imagen 7" title="Música relajante">
+                      </div>
+                      <span class="musica-relajante" title="Música relajante">Música relajante</span>
+                  </div>
+              </a>
+              <a href="{{ url_for('user.agendar_cita') }}" class="feature-card">
+                <div class="frame-12">
+                      <div class="image-8">
+                          <img src="{{ url_for('static', filename='user/image 8.png') }}" alt="Imagen 8" title="Agendar cita">
+                      </div>
+                      <span class="terapia" title="Agendar Cita">Agendar Cita</span>
+                  </div>
+              </a>
+          </div>
+          <div class="wrapper-3">
+            <a href="{{ url_for('user.mostrar_calendario') }}" class="feature-card">
+                <div class="frame-11">
+                      <div class="image-11">
+                          <img src="{{ url_for('static', filename='user/image 11 (1).png') }}" alt="Imagen 11" title="Calendario">
+                      </div>
+                      <span class="calendario" title="Calendario">Calendario</span>
+                  </div>
+              </a>
+              <a href="{{ url_for('user.games') }}" class="feature-card">
+                  <div class="frame-14">
+                      <div class="image-10">
+                          <img src="{{ url_for('static', filename='user/image 10 (1).png') }}" alt="Imagen 10" title="Herramientas y actividades">
+                      </div>
+                      <span class="herramientas-yactividades" title="Herramientas y actividades">Herramientas y actividades</span>
+                  </div>
+              </a>
+          </div>
+      </div>
+      <div class="frame-13">
+        <a href="https://wa.link/064lwr" target="_blank">
+            <img src="{{ url_for('static', filename='user/wa.png') }}" alt="Chatea con bot" title="Chatea con nosotros">
+        </a>
+      </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var menuToggle = document.getElementById('menu-toggle');
+    var menuDropdown = document.getElementById('menu-dropdown');
+
+    menuToggle.addEventListener('click', function() {
+        menuDropdown.classList.toggle('show');
+    });
+
+    // Cerrar el menú si se hace clic fuera de él
+    window.addEventListener('click', function(event) {
+        if (!event.target.matches('.imagen-esquinad')) {
+            if (menuDropdown.classList.contains('show')) {
+                menuDropdown.classList.remove('show');
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>

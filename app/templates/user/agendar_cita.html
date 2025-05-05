@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user/style7.css') }}">
+    <title>Sanamed - Software de Salud Mental</title>
+</head>
+<body>
+    <h1 class="titulo-centrado">SANAMED</h1>
+    <img src="{{ url_for('static', filename='auth/rectangle 6.png') }}" alt="Imagen Superior" class="imagen-superior">
+    <img src="{{ url_for('static', filename='auth/saludmental1.png') }}" alt="Imagen Esquina Izquierda" class="imagen-esquina izquierda">
+
+    <div class="menu-container">
+        <img src="{{ url_for('static', filename='auth/saludmental1.png') }}" alt="Imagen Esquina Derecha" class="imagen-esquina derecha" id="menu-toggle">
+        <div class="menu-dropdown" id="menu-dropdown">
+            <a href="{{ url_for('user.user_home') }}">Home</a>
+            <a href="{{ url_for('user.configuracion') }}">Configuración</a>
+            <a href="{{ url_for('auth.logout') }}">Cerrar Sesión</a>
+        </div>
+    </div>
+
+    <div class="container"> 
+        <div class="header-container">
+            <a href="javascript:history.back()" class="boton-atras">
+                <img src="{{ url_for('static', filename='user/atras.png') }}" alt="Volver atrás" class="imagen-flecha">
+            </a>
+            <h1 class="title" title="Formulario para agendar su cita">Agende su Cita</h1>
+        </div>
+        
+        <div class="form-wrapper">
+            <!-- Formulario con ID explícito -->
+            <form id="appointment-form" action="{{ url_for('user.agendar_cita') }}"  method="POST" class="appointment-form">
+                <div class="flash-messages">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="flash-message {{ category }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="fecha" class="form-label" title="Fecha de su cita">Fecha:</label>
+                    <input type="date" id="fecha" name="fecha" required class="form-input" title="Seleccione la fecha de su cita" min="{{ today }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="profesional" class="form-label" title="Seleccione el profesional">Profesional:</label>
+                    <select id="profesional" name="profesional" class="form-select" title="Profesional de la cita" required>
+                        <option value="" disabled selected>Seleccione un profesional</option>
+                        {% for profesional in profesionales %}
+                            <option value="{{ profesional[0] }}">{{ profesional[1] }} - {{ profesional[2] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="hora" class="form-label" title="Hora de su cita">Hora:</label>
+                    <select id="hora" name="hora" required class="form-select" title="Seleccione la hora de su cita" disabled>
+                        <option value="" disabled selected>Primero seleccione fecha y profesional</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="motivo" id="motivo-label" title="Motivo de su cita">Motivo:</label>
+                    <textarea id="motivo" name="motivo" rows="7" required class="form-textarea" placeholder="Describa el motivo de la cita" title="Motivo de la cita"></textarea>
+                </div>
+            </form>
+            
+            <!-- Botón FUERA del formulario pero asociado a él -->
+            <div class="button-container">
+                <button type="submit" form="appointment-form" id="agendar-cita" class="form-submit" title="Agendar cita">Agendar Cita</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Menu toggle
+        var menuToggle = document.getElementById('menu-toggle');
+        var menuDropdown = document.getElementById('menu-dropdown');
+    
+        menuToggle.addEventListener('click', function() {
+            menuDropdown.classList.toggle('show');
+        });
+    
+        // Cerrar el menú si se hace clic fuera de él
+        window.addEventListener('click', function(event) {
+            if (!event.target.matches('.imagen-esquina')) {
+                if (menuDropdown.classList.contains('show')) {
+                    menuDropdown.classList.remove('show');
+                }
+            }
+        });
+
+        // Obtener elementos del formulario
+        const fechaInput = document.getElementById('fecha');
+        const profesionalSelect = document.getElementById('profesional');
+        const horaSelect = document.getElementById('hora');
+
+        // Función para cargar horas disponibles
+        function cargarHorasDisponibles() {
+            const fecha = fechaInput.value;
+            const profesional = profesionalSelect.value;
+
+            if (!fecha || !profesional) {
+                horaSelect.innerHTML = '<option value="" disabled selected>Primero seleccione fecha y profesional</option>';
+                horaSelect.disabled = true;
+                return;
+            }
+
+            // Mostrar mensaje de carga
+            horaSelect.innerHTML = '<option value="" disabled selected>Cargando horarios disponibles...</option>';
+            horaSelect.disabled = true;
+
+            // Hacer petición al servidor
+            fetch('/user/obtener_horarios_disponibles', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    fecha: fecha,
+                    profesional: profesional
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    horaSelect.innerHTML = `<option value="" disabled selected>${data.error}</option>`;
+                    return;
+                }
+
+                if (data.horas_disponibles.length === 0) {
+                    horaSelect.innerHTML = '<option value="" disabled selected>No hay horarios disponibles para esta fecha</option>';
+                    return;
+                }
+
+                // Limpiar select
+                horaSelect.innerHTML = '<option value="" disabled selected>Selecciona una hora</option>';
+
+                // Agregar opciones de horas disponibles
+                data.horas_disponibles.forEach(hora => {
+                    const option = document.createElement('option');
+                    option.value = hora;
+                    option.textContent = hora;
+                    horaSelect.appendChild(option);
+                });
+
+                horaSelect.disabled = false;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                horaSelect.innerHTML = '<option value="" disabled selected>Error al cargar horarios</option>';
+            });
+        }
+
+        // Escuchar cambios en fecha y profesional
+        fechaInput.addEventListener('change', cargarHorasDisponibles);
+        profesionalSelect.addEventListener('change', cargarHorasDisponibles);
+
+        // Establecer fecha mínima como hoy
+        const today = new Date().toISOString().split('T')[0];
+        fechaInput.min = today;
+    });
+    </script>
+</body>
+</html>

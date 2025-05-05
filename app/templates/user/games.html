@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Juegos Educativos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style25.css') }}">
+</head>
+<body>
+    <h1 class="titulo-centrado">SANAMED</h1>
+    <img src="static/rectangle 6.png" alt="Imagen Superior" class="imagen-superior">
+    <img src="static/saludmental1.png" alt="Imagen Esquina Izquierda" class="imagen-esquinai izquierda">
+
+    <div class="menu-container">
+        <img src="static/saludmental1.png" alt="Imagen Esquina Derecha" class="imagen-esquinad derecha" id="menu-toggle">
+        <div class="menu-dropdown" id="menu-dropdown">
+            <a href="{{ url_for('user.user_home') }}">Home</a>
+            <a href="{{ url_for('user.configuracion') }}">Configuración</a>
+            <a href="{{ url_for('auth.logout') }}">Cerrar Sesión</a>
+            <a href="{{ url_for('user.games') }}">Actividades</a>
+
+        </div>
+    </div>
+        
+
+   <!-- Contenedor principal para todos los juegos -->
+<div class="container" >
+    <h1 title="herramientas">Herramienas y Actividades</h1>
+    <div id="juegos" class="juegos-container">
+    </div>
+    
+    <!-- Juego de Meditación -->
+<div id="meditacion" class="juego-cuadro hidden">
+    <div class="header-container">
+
+        <a href="{{ url_for('user.games') }}"  class="boton-atras" title="Volver a Juegos">
+            <img src="{{ url_for('static', filename='atras.png') }}" alt="Volver-atras" class="imagen-flecha">
+
+        </a>
+        <h2>Meditación</h2>
+    </div>
+
+    <p>Instrucciones: Este juego te guiará a través de un ejercicio de meditación. Elige la duración de tu meditación y presiona "Iniciar". Durante la meditación, puedes escuchar música relajante si lo deseas.</p>
+    <label for="duracion">Elige la duración de la meditación:</label>
+    <select id="duracion">
+        <option value="1">1 minuto</option>
+        <option value="5">5 minutos</option>
+        <option value="10">10 minutos</option>
+        <option value="15">15 minutos</option>
+    </select>
+    <label for="musica">¿Deseas escuchar música de fondo?</label>
+    <input type="checkbox" id="musica">
+    <label for="cancion">Elige una canción:</label>
+    <select id="cancion" disabled>
+        <option value="">Selecciona una canción</option>
+        <option value="static/Last Sunrise - Adam MacDougall.mp3">Canción 1</option>
+        <option value="static/Mirage melody - Patrick Patrikios.mp3">Canción 2</option>
+    </select>
+    <button id="iniciar-meditacion">Iniciar Meditación</button>
+    <div id="temporizador" class="hidden">
+        <p id="cuenta-regresiva">0</p>
+    </div>
+    <div id="resultado" class="hidden"></div>
+</div> <!-- Fin del bloque de meditación -->
+
+
+    <!-- Cuestionario de Autoevaluación -->
+    <div id="cuestionario" class="juego-cuadro hidden">
+        <div class="header-container">
+            <a href="{{ url_for('user.games') }}"  class="boton-atras" title="Volver a Juegos">
+                <img src="{{ url_for('static', filename='atras.png') }}" alt="Volver-atras" class="imagen-flecha">
+            </a>
+            <h2>Cuestionario de Autoevaluación</h2>
+        </div>
+        <form id="form-cuestionario">
+            <label for="respuesta1">¿Te sientes estresado hoy?</label><br>
+            <input type="radio" name="respuesta1" value="si"> Sí<br>
+            <input type="radio" name="respuesta1" value="no"> No<br>
+    
+            <label for="respuesta2">¿Has tenido problemas para dormir últimamente?</label><br>
+            <input type="radio" name="respuesta2" value="si"> Sí<br>
+            <input type="radio" name="respuesta2" value="no"> No<br>
+    
+            <button type="submit">Enviar</button>
+        </form>
+        <div id="resultado-cuestionario" style="display: none;"></div>
+    </div> <!-- Fin del bloque de cuestionario -->
+
+    <!-- Desafío de Estrategia -->
+    <div class="juego-cuadro hidden" id="desafio-estrategia">
+        <div class="header-container">
+            <a href="{{ url_for('user.games') }}"  class="boton-atras" title="Volver a Juegos">
+                <img src="{{ url_for('static', filename='atras.png') }}" alt="Volver-atras" class="imagen-flecha">
+            </a>
+            <h2>Desafío de Estrategia</h2>
+        </div>
+        <p>Desarrolla habilidades de pensamiento crítico y resolución de problemas.</p>
+        
+        <label for="dificultad">Selecciona la dificultad:</label>
+        <select id="dificultad">
+            <option value="facil">Fácil</option>
+            <option value="intermedio">Intermedio</option>
+            <option value="dificil">Difícil</option>
+        </select>
+        
+        <button id="iniciar-desafio">Iniciar Juego</button>
+        
+        <div id="juego-contenido" class="hidden">
+            <div id="pregunta"></div>
+            <input type="text" id="respuesta" placeholder="Escribe tu respuesta">
+            <button id="enviar-respuesta">Enviar Respuesta</button>
+            <div id="resultado-pregunta" class="hidden"></div>
+            <div id="temporizador" class="hidden">
+                <p>Tiempo restante: <span id="tiempo"></span> segundos</p>
+            </div>
+        </div>
+        
+        <div id="resultado-final" class="hidden"></div>
+    </div>
+
+    <!-- Juego de Respiración Profunda -->
+    <div class="juego-cuadro hidden" id="juego-respiracion">
+        <div class="header-container">
+            <a href="{{ url_for('user.games') }}"  class="boton-atras" title="Volver a Juegos">
+                <img src="{{ url_for('static', filename='atras.png') }}" alt="Volver-atras" class="imagen-flecha">
+            </a>
+            <h2>Respiración Profunda</h2>
+        </div>
+        <p>Aprende técnicas de respiración para reducir la ansiedad. Sigue las instrucciones en pantalla para inhalar, exhalar y mantener la respiración.</p>
+        
+        <button id="iniciar-respiracion">Iniciar</button>
+        
+        <div id="respiracion-contenido" class="hidden">
+            <p id="instruccion-respiracion">Prepárate para comenzar...</p>
+            <div id="circulo-respiracion"></div>
+            <div id="temporizador-respiracion">
+                <p>Tiempo restante: <span id="tiempo-respiracion">300</span> segundos</p>
+            </div>
+            <div id="resultado-respiracion" class="hidden"></div>
+        </div>
+    </div>
+
+    <!-- Jardín de Gratitud -->
+    <div class="juego-cuadro hidden" id="jardin-gratitud">
+        <div class="header-container">
+            <a href="{{ url_for('user.games') }}"  class="boton-atras" title="Volver a Juegos">
+                <img src="{{ url_for('static', filename='atras.png') }}" alt="Volver-atras" class="imagen-flecha">
+            </a>
+            <h2>Jardín de Gratitud</h2>
+        </div>
+        <p>Expresa y comparte cosas por las que estás agradecido. Añade un nuevo pensamiento de gratitud y mira cómo crece tu jardín.</p>
+    
+        <label for="input-gratitud">Escribe algo por lo que estés agradecido:</label>
+        <div class="form-gratitud">
+            <textarea id="input-gratitud" placeholder="Escribe aquí lo que agradeces hoy..." rows="3"></textarea>
+            <button id="agregar-gratitud" class="btn-verde">Añadir Gratitud</button>
+        </div>
+    
+        <div id="jardin-contenido">
+            <h3>Tu Jardín de Gratitud</h3>
+            <div id="jardin">
+                <!-- Las flores se cargarán aquí -->
+            </div>
+        </div>
+    
+        <div id="resultado-gratitud" class="hidden"></div>
+    </div>
+    
+
+    <script>
+        // Cargar los juegos desde la API
+        fetch('/api/juegos')
+            .then(response => response.json())
+            .then(data => {
+                const juegosDiv = document.getElementById('juegos');
+                // Verificar si ya se cargaron los juegos
+                if (juegosDiv.children.length === 0) {
+                    data.juegos.forEach(juego => {
+                        const juegoDiv = document.createElement('div');
+                        juegoDiv.className = 'juego-cuadro'; // Asegura que todos tengan el mismo estilo
+                        juegoDiv.innerHTML = `<h2>${juego.nombre}</h2><p>${juego.descripcion}</p><button onclick="jugar(${juego.id})">Jugar</button>`;
+                        juegosDiv.appendChild(juegoDiv);
+                    });
+                }
+            })
+            .catch(error => console.error('Error al cargar los juegos:', error));
+
+        function jugar(id) {
+            // Ocultar todos los juegos
+            document.querySelectorAll('.juego-cuadro').forEach(cuadro => cuadro.classList.add('hidden'));
+            if (id === 1) { // Meditación
+                document.getElementById('meditacion').classList.remove('hidden');
+                document.getElementById('musica').addEventListener('change', function() {
+                    document.getElementById('cancion').disabled = !this.checked;
+                });
+            } else if (id === 2) { // Cuestionario de Autoevaluación
+                document.getElementById('cuestionario').classList.remove('hidden');
+            } else if (id === 3) { // Desafío de Estrategia
+                document.getElementById('desafio-estrategia').classList.remove('hidden');
+            } else if (id === 4) { // Juego de Respiración Profunda
+                document.getElementById('juego-respiracion').classList.remove('hidden');
+            } else if (id === 5) { // Jardín de Gratitud
+                document.getElementById('jardin-gratitud').classList.remove('hidden');
+            }
+        }
+
+        // Manejar el inicio de la meditación
+        document.getElementById('iniciar-meditacion').addEventListener('click', function() {
+            const duracionSeleccionada = parseInt(document.getElementById('duracion').value);
+            let tiempo = duracionSeleccionada * 60; // Convertir a segundos
+            const cuentaRegresiva = document.getElementById('cuenta-regresiva');
+            document.getElementById('temporizador').classList.remove('hidden');
+
+            // Reproducir música de fondo si está seleccionada
+            let audio;
+            if (document.getElementById('musica').checked) {
+                const cancionSeleccionada = document.getElementById('cancion').value;
+                if (cancionSeleccionada) {
+                    audio = new Audio(cancionSeleccionada);
+                    audio.loop = true;
+                    audio.play();
+                } else {
+                    alert("Por favor, selecciona una canción.");
+                    return;
+                }
+            }
+
+            const intervalo = setInterval(() => {
+                cuentaRegresiva.textContent = tiempo;
+                tiempo--;
+
+                if (tiempo < 0) {
+                    clearInterval(intervalo);
+                    cuentaRegresiva.textContent = "¡Meditación finalizada!";
+                    if (audio) {
+                        audio.pause(); // Detener la música
+                    }
+                    document.getElementById('resultado').textContent = "Esperamos que te sientas más relajado y centrado.";
+                    document.getElementById('resultado').classList.remove('hidden');
+                }
+            }, 1000);
+        });
+
+        // Manejar el envío del cuestionario
+        document.getElementById('form-cuestionario').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar el envío del formulario
+            const respuesta1 = document.querySelector('input[name="respuesta1"]:checked');
+            const respuesta2 = document.querySelector('input[name="respuesta2"]:checked');
+    
+            let resultadoTexto = 'Tus respuestas:\n';
+            if (respuesta1) {
+                resultadoTexto += `1. Te sientes estresado hoy: ${respuesta1.value}\n`;
+            }
+            if (respuesta2) {
+                resultadoTexto += `2. Has tenido problemas para dormir últimamente: ${respuesta2.value}\n`;
+            }
+
+            document.getElementById('resultado-cuestionario').textContent = resultadoTexto;
+            document.getElementById('resultado-cuestionario').style.display = 'block';
+            document.getElementById('cuestionario').style.display = 'none'; // Ocultar el cuestionario después de enviar
+        });
+
+        //juego de estrategia
+        document.getElementById('iniciar-desafio').addEventListener('click', function() {
+            const dificultad = document.getElementById('dificultad').value;
+            const retos = obtenerRetos(dificultad);
+            let puntaje = 0;
+            let indiceReto = 0;
+            const totalRetos = retos.length;
+        
+            document.getElementById('juego-contenido').classList.remove('hidden');
+            mostrarReto(retos[indiceReto]);
+            iniciarTemporizador(20);
+        
+            document.getElementById('enviar-respuesta').addEventListener('click', function() {
+                const respuesta = document.getElementById('respuesta').value.trim().toLowerCase();
+                const respuestasCorrectas = retos[indiceReto].respuestas.map(r => r.toLowerCase());
+        
+                if (respuestasCorrectas.includes(respuesta)) {
+                    puntaje++;
+                    document.getElementById('resultado-pregunta').textContent = "¡Correcto!";
+                } else {
+                    document.getElementById('resultado-pregunta').textContent = `Incorrecto. La respuesta correcta era: ${retos[indiceReto].respuestas.join(", ")}`;
+                }
+                document.getElementById('resultado-pregunta').classList.remove('hidden');
+        
+                indiceReto++;
+                if (indiceReto < totalRetos) {
+                    mostrarReto(retos[indiceReto]);
+                } else {
+                    document.getElementById('juego-contenido').classList.add('hidden');
+                    mostrarResultadoFinal(puntaje, totalRetos);
+                }
+                document.getElementById('respuesta').value = '';
+            });
+        });
+        
+        function obtenerRetos(dificultad) {
+            const retosFacil = [
+                { pregunta: "¿Cuál es el siguiente número en la secuencia: 2, 4, 6, 8...?", respuestas: ["10", "diez","DIEZ", "Diez"] },
+                { pregunta: "Si un reloj marca las 3:00, ¿cuántos grados hay entre las manecillas?", respuestas: ["90" , " NOVENTA" , "Noventa", "noventa"]  },
+                { pregunta: "¿Qué color resulta de mezclar rojo y azul?", respuestas: ["morado", "púrpura"] },
+                { pregunta: "¿Cuántos días tiene una semana?", respuestas: ["7" , "SIETE " , "SEVEN" , "Siete" ,"siete"] }
+            ];
+        
+            const retosIntermedio = [
+                { pregunta: "Resuelve: 8 + (3 × 4) - 5", respuestas: ["15"] },
+                { pregunta: "Si un tren viaja a 60 km/h, ¿cuánto tarda en recorrer 120 km?", respuestas: ["2 horas", "2 horas"] },
+                { pregunta: "¿Cuántos segundos tiene una hora?", respuestas: ["3600"] },
+                { pregunta: "¿Cuánto es el área de un cuadrado de lado 5?", respuestas: ["25"] }
+            ];
+        
+            const retosDificil = [
+                { pregunta: "¿Cuál es el número primo más pequeño mayor que 100?", respuestas: ["101"] },
+                { pregunta: "¿Qué teorema establece que el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos?", respuestas: ["Pitágoras"] },
+                { pregunta: "¿Cuánto es la raíz cuadrada de 144?", respuestas: ["12"] },
+                { pregunta: "¿En qué año llegó el hombre a la Luna?", respuestas: ["1969"] }
+            ];
+        
+            if (dificultad === "facil") {
+                return retosFacil;
+            } else if (dificultad === "intermedio") {
+                return retosIntermedio;
+            } else {
+                return retosDificil;
+            }
+        }
+        
+        function mostrarReto(reto) {
+            document.getElementById('pregunta').textContent = reto.pregunta;
+            document.getElementById('resultado-pregunta').classList.add('hidden');
+        }
+        
+        function iniciarTemporizador(segundos) {
+            let tiempo = segundos;
+            const temporizador = document.getElementById('temporizador');
+            const cuentaRegresiva = document.getElementById('tiempo');
+            temporizador.classList.remove('hidden');
+            cuentaRegresiva.textContent = tiempo;
+        
+            const intervalo = setInterval(() => {
+                tiempo--;
+                cuentaRegresiva.textContent = tiempo;
+                if (tiempo <= 0) {
+                    clearInterval(intervalo);
+                    temporizador.classList.add('hidden');
+                    document.getElementById('resultado-pregunta').textContent = "Se acabó el tiempo.";
+                    document.getElementById('resultado-pregunta').classList.remove('hidden');
+                }
+            }, 1000);
+        }
+        
+        function mostrarResultadoFinal(puntaje, total) {
+            const mensaje = `Has completado el desafío. Puntaje: ${puntaje} de ${total}.`;
+            document.getElementById('resultado-final').textContent = mensaje;
+            document.getElementById('resultado-final').classList.remove('hidden');
+        }
+        
+        // juego respiracion 
+        // juego respiracion 
+document.getElementById('iniciar-respiracion').addEventListener('click', function() {
+    document.getElementById('respiracion-contenido').classList.remove('hidden');
+    iniciarTemporizadorRespiracion(180); // Establecemos el tiempo a 3 minutos (180 segundos)
+    iniciarEjercicioRespiracion();
+});
+
+function iniciarEjercicioRespiracion() {
+    const cicloRespiracion = [
+        { instruccion: "Inhala profundamente", duracion: 4 },
+        { instruccion: "Mantén la respiración", duracion: 4 },
+        { instruccion: "Exhala lentamente", duracion: 6 },
+    ];
+    
+    let indiceCiclo = 0;
+    ejecutarCiclo();
+
+    function ejecutarCiclo() {
+        const { instruccion, duracion } = cicloRespiracion[indiceCiclo];
+        document.getElementById('instruccion-respiracion').textContent = instruccion;
+        animarCirculo(instruccion, duracion);
+
+        setTimeout(() => {
+            indiceCiclo = (indiceCiclo + 1) % cicloRespiracion.length;
+            ejecutarCiclo();
+        }, duracion * 1000);
+    }
+}
+
+function iniciarTemporizadorRespiracion(segundos) {
+    let tiempo = segundos;
+    const cuentaRegresiva = document.getElementById('tiempo-respiracion');
+
+    const intervalo = setInterval(() => {
+        tiempo--;
+        cuentaRegresiva.textContent = tiempo;
+
+        if (tiempo <= 0) {
+            clearInterval(intervalo);
+            document.getElementById('resultado-respiracion').textContent = "¡Ejercicio completado! Esperamos que te sientas más relajado.";
+            document.getElementById('resultado-respiracion').classList.remove('hidden');
+            document.getElementById('respiracion-contenido').classList.add('hidden');
+        }
+    }, 1000);
+}
+
+function animarCirculo(instruccion, duracion) {
+    const circulo = document.getElementById('circulo-respiracion');
+    circulo.style.transition = `transform ${duracion}s ease-in-out`;
+
+    if (instruccion === "Inhala profundamente") {
+        circulo.style.transform = "scale(1.5)";
+    } else if (instruccion === "Exhala lentamente") {
+        circulo.style.transform = "scale(0.8)";
+    } else {
+        circulo.style.transform = "scale(1)";
+    }
+}
+
+// Cuando el usuario hace clic en el botón "Añadir al jardín"
+document.getElementById('agregar-gratitud').addEventListener('click', function() {
+    const gratitud = document.getElementById('input-gratitud').value.trim();
+    if (gratitud.length < 3) {
+        alert('Por favor escribe al menos 3 caracteres');
+        return;
+    }
+    if (gratitud.length > 500) {
+        alert('Máximo 500 caracteres');
+        return;
+    }
+    guardarGratitudEnBaseDeDatos(gratitud);
+});
+
+// Función para agregar una flor visualmente al jardín
+function agregarFlorAlJardin(gratitudData) {
+    const jardin = document.getElementById('jardin');
+    const flor = document.createElement('div');
+    flor.className = 'flor';
+    flor.dataset.id = gratitudData.id; // Guardar el ID de la gratitud
+    
+    // Asignar un color aleatorio a la flor
+    flor.style.backgroundColor = obtenerColorAleatorio();
+    
+    const textoFlor = document.createElement('p');
+    textoFlor.textContent = gratitudData.texto;
+    flor.appendChild(textoFlor);
+
+    // Botón para eliminar la flor
+    const botonEliminar = document.createElement('button');
+    botonEliminar.textContent = "Eliminar";
+    botonEliminar.className = "eliminar-flor";
+    botonEliminar.addEventListener('click', function() {
+        eliminarFlorDeBaseDeDatos(gratitudData.id);
+        jardin.removeChild(flor);
+    });
+    flor.appendChild(botonEliminar);
+    
+    jardin.appendChild(flor);
+    
+    // Animar la flor
+    animarFlor(flor);
+    document.getElementById('input-gratitud').value = ''; // Limpiar el textarea
+}
+// Función para animar la flor cuando se agrega
+function animarFlor(flor) {
+    flor.style.opacity = 0;
+    flor.style.transform = "scale(0.5)";
+    
+    setTimeout(() => {
+        flor.style.transition = "all 1s ease";
+        flor.style.opacity = 1;
+        flor.style.transform = "scale(1)";
+    }, 100);
+}
+
+// Función para obtener un color aleatorio para la flor
+function obtenerColorAleatorio() {
+    const colores = ['#FF5733', '#33FF57', '#5733FF', '#F33FF5', '#33FFF5', '#F5FF33'];
+    const indiceAleatorio = Math.floor(Math.random() * colores.length);
+    return colores[indiceAleatorio];
+}
+// Guardar la gratitud en la base de datos
+function guardarGratitudEnBaseDeDatos(gratitud) {
+    fetch('user/agregar_gratitud', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            gratitud: gratitud
+        }),
+        credentials: 'include' // Para incluir la cookie de sesión
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.id_gratitud) {
+            agregarFlorAlJardin({
+                id: data.id_gratitud,
+                texto: gratitud,
+                fecha: new Date().toISOString()
+            });
+        } else if (data.error) {
+            console.error('Error:', data.error);
+            alert('Error al guardar: ' + data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error al conectar con el servidor');
+    });
+}
+
+// Eliminar la flor de la base de datos
+function eliminarFlorDeBaseDeDatos(idGratitud) {
+    fetch(`/eliminar_gratitud/${idGratitud}`, {
+        method: 'DELETE',
+        credentials: 'include' // Para incluir la cookie de sesión
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            console.error('Error:', data.error);
+            alert('Error al eliminar: ' + data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error al conectar con el servidor');
+    });
+}
+
+// Cargar gratitudes al iniciar la página
+document.addEventListener('DOMContentLoaded', function() {
+    cargarGratitudesDesdeBaseDeDatos();
+});
+
+function cargarGratitudesDesdeBaseDeDatos() {
+    fetch('/cargar_gratitudes', {
+        credentials: 'include' // Para incluir la cookie de sesión
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.gratitudes) {
+            data.gratitudes.forEach(gratitud => {
+                agregarFlorAlJardin({
+                    id: gratitud.id,
+                    texto: gratitud.texto,
+                    fecha: gratitud.fecha
+                });
+            });
+        } else if (data.error) {
+            console.error('Error:', data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error al cargar las gratitudes:', error);
+    });
+}
+
+
+
+        
+        //menu
+        
+            document.addEventListener('DOMContentLoaded', function() {
+                var menuToggle = document.getElementById('menu-toggle');
+                var menuDropdown = document.getElementById('menu-dropdown');
+            
+                menuToggle.addEventListener('click', function() {
+                    menuDropdown.classList.toggle('show');
+                });
+            
+                // Cerrar el menú si se hace clic fuera de él
+                window.addEventListener('click', function(event) {
+                    if (!event.target.matches('.imagen-esquinad')) {
+                        if (menuDropdown.classList.contains('show')) {
+                            menuDropdown.classList.remove('show');
+                        }
+                    }
+                });
+            });
+
+        
+    </script>
+</body>
+</html>

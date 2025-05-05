@@ -1,0 +1,286 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    /*background-color: #3e4e3e;*/
+    background: url("2392606046863777.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    line-height: 1.6;
+}
+
+.container {
+    width: 1280px;
+    height: 700px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    margin: 10px;
+    font-size: 2.5em;
+    color: #000000;
+    font-family: "Jomhuria", serif;
+}
+
+.appointment-form {
+    max-width: 700px;
+    margin: 0 auto;
+    height: 420px;
+    margin-top: 20px;
+    padding: 40px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    height: 440px;
+}
+
+.form-label {
+    margin-top: -10px;
+    font-weight: bold;
+    font-size: 20px;
+    width: 100px;
+    text-align: center;
+}
+
+.form-date {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-submit {
+    display: inline-block;
+    width: 100%;
+    padding: 20px;
+    background-color: #8DCB9E;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 22px;
+    cursor: pointer;
+    margin: 15px 0;
+    transition: background-color 0.3s ease;
+}
+
+.form-submit:hover {
+    background-color: darkgreen;
+}
+
+
+.container-111 {
+    margin: 20px 0 20px;
+    font-size: 28px;
+}
+
+.emociones, .consultas {
+    margin: 20px 0;
+}
+
+/* Estilos para los mensajes flash - Versión centrada */
+.flash-messages {
+  width: 100%;
+  text-align: center;
+  margin: 15px 0;
+}
+
+.flash-message {
+  padding: 12px 25px;
+  margin: 10px auto;
+  border-radius: 25px;
+  color: white;
+  opacity: 0.95;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  font-size: 16px;
+  font-weight: 500;
+  display: inline-block;
+  max-width: 80%;
+  animation: fadeIn 0.5s, fadeOut 0.5s 4.5s;
+  animation-fill-mode: forwards;
+}
+
+/* Colores armonizados con tu diseño */
+.success {
+  background-color: #72da91; /* Mismo verde que tu botón de WhatsApp */
+  border-left: 5px solid #4CAF50;
+}
+
+.error {
+  background-color: #FF6B6B; /* Similar a tu color de "Enojado" */
+  border-left: 5px solid #dc3545;
+}
+
+.info {
+  background-color: #87CEEB; /* Similar a tu color de "Triste" */
+  color: #333;
+}
+
+.warning {
+  background-color: #FFD700; /* Similar a tu color de "Feliz" */
+  border-left: 5px solid #ffc107;
+  color: #333;
+}
+
+/* Animaciones suaves */
+@keyframes fadeIn {
+  from { 
+      opacity: 0;
+      transform: translateY(-10px);
+  }
+  to { 
+      opacity: 0.95;
+      transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from { 
+      opacity: 0.95;
+  }
+  to { 
+      opacity: 0;
+      display: none;
+  }
+}
+
+@media (max-width: 480px) {
+    body {
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden; /* Previene el desplazamiento */
+    } }
+
+
+    
+    .imagen-superior {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0.7;
+    
+    }
+  
+  
+  .imagen-esquina {
+    width: 60px; /* Tamaño pequeño */
+    height: auto;
+    position: absolute;
+    top: 14px; /* Ajusta según sea necesario */
+  }
+  
+  .izquierda {
+    left: 100px; /* Esquina superior izquierda */
+  }
+  
+  .derecha {
+    right: 100px; /* Esquina superior derecha */
+  }
+  
+  
+  
+  .menu-container {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    z-index: 1000;
+    width: 60px;
+  }
+  
+  
+  
+  .menu-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 60px;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .menu-dropdown a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .menu-dropdown a:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .show {
+    display: block;
+  }
+
+  /* Contenedor del encabezado */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+/* Botón de atrás */
+.boton-atras {
+  position: absolute;
+  left: 5px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  top: 2px;
+}
+
+.boton-atras:hover {
+  transform: scale(1.1);
+}
+
+.imagen-flecha {
+  width: 40px;
+  height: auto;
+}
+
+/* Ajustes para el título */
+.header-container h1 {
+  margin: 0;
+  text-align: center;
+  flex-grow: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-container {
+      justify-content: flex-start;
+      padding-left: 60px;
+  }
+  
+  .boton-atras {
+      left: 10px;
+  }
+  
+  .imagen-flecha {
+      width: 30px;
+  }
+  
+  .header-container h1 {
+      font-size: 1.8rem;
+      text-align: left;
+  }
+}

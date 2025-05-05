@@ -1,0 +1,307 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: url("2392606046863777.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    line-height: 1.6;
+    position: center, absolute;
+}
+
+h1 {
+    text-align: center;
+    margin: 10px;
+    font-size: 2.5em;
+    color: #000000;
+    font-family: "Jomhuria", serif;
+}
+
+.container {
+    width: 1280px;
+    height: auto; /* Cambiado a auto para que se ajuste al contenido */
+    margin: 60px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    position: center;
+}
+
+.form-wrapper {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.appointment-form {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.form-label {
+    display: inline-block;
+    width: 100px;
+    text-align: left;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: calc(100% - 110px);
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-textarea {
+    height: 70px;
+    resize: none;
+    font-family: "Releway", sans-serif;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.form-submit {
+    width: 300px;
+    height: 60px;
+    background-color: #8DCB9E;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-submit:hover {
+    background-color: darkgreen;
+}
+
+/* Resto de tus estilos existentes... */
+.flash-messages {
+    width: 100%;
+    text-align: center;
+    margin: 5px 0;
+}
+
+.flash-message {
+    padding: 9px 20px;
+    margin: 3px auto;
+    border-radius: 25px;
+    color: white;
+    opacity: 0.95;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+    max-width: 90%;
+    animation: fadeIn 0.5s, fadeOut 0.5s 4.5s;
+    animation-fill-mode: forwards;
+}
+
+.success {
+    background-color: #72da91;
+}
+
+.error {
+    background-color: #FF6B6B;
+}
+
+.info {
+    background-color: #87CEEB;
+    color: #333;
+}
+
+.warning {
+    background-color: #FFD700;
+    color: #333;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { 
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to { 
+        opacity: 0.95;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from { 
+        opacity: 0.95;
+    }
+    to { 
+        opacity: 0;
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+        width: 100%;
+    }
+
+    .form-label,
+    #motivo-label {
+        width: 100%;
+    }
+    
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .form-submit {
+        width: 100%;
+    }
+}
+
+/* Estilos para imágenes y menú */
+.imagen-superior {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.7;
+  
+  }
+
+.imagen-esquina {
+    width: 60px;
+    height: auto;
+    position: absolute;
+    top: 14px;
+}
+
+.izquierda {
+    left: 100px;
+}
+
+.derecha {
+    right: 100px;
+}
+
+.menu-container {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    z-index: 1000;
+    width: 60px;
+}
+
+.menu-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 60px;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.menu-dropdown a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.menu-dropdown a:hover {
+    background-color: #f1f1f1;
+}
+
+.show {
+    display: block;
+}
+
+/* Contenedor del encabezado */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 10px;
+  }
+  
+  /* Botón de atrás */
+  .boton-atras {
+    position: absolute;
+    left: 5px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    top: 7px;
+  }
+  
+  .boton-atras:hover {
+    transform: scale(1.1);
+  }
+  
+  .imagen-flecha {
+    width: 40px;
+    height: auto;
+  }
+  
+  /* Ajustes para el título */
+  .header-container h1 {
+    margin: 0;
+    text-align: center;
+    flex-grow: 1;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header-container {
+        justify-content: flex-start;
+        padding-left: 60px;
+    }
+    
+    .boton-atras {
+        left: 10px;
+    }
+    
+    .imagen-flecha {
+        width: 30px;
+    }
+    
+    .header-container h1 {
+        font-size: 1.8rem;
+        text-align: left;
+    }
+  }
