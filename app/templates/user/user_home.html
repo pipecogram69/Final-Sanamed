@@ -152,11 +152,29 @@
               </a>
           </div>
       </div>
-      <div class="frame-13">
-        <a href="https://wa.link/064lwr" target="_blank">
-            <img src="{{ url_for('static', filename='user/wa.png') }}" alt="Chatea con bot" title="Chatea con nosotros">
-        </a>
-      </div>
+<!-- Botón flotante estilo WhatsApp -->
+<!-- Botón flotante estilo WhatsApp -->
+<div id="chatbot-button" onclick="toggleChat()">
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" alt="Chatbot">
+</div>
+
+<!-- Ventana de chat -->
+<div id="chat-window" style="display: none;">
+  <div id="chat-header">
+    Asistente Virtual
+    <span onclick="toggleChat()" style="float:right; cursor:pointer;">&times;</span>
+  </div>
+  <div id="chat-body"></div>
+  <div id="chat-footer">
+    <input type="text" id="user-input" placeholder="Escribe algo..." onkeydown="if(event.key==='Enter') sendMessage()">
+    <button onclick="sendMessage()">Enviar</button>
+  </div>
+</div>
+
+
+</body>
+
+
     </div>
 </div>
 
@@ -179,5 +197,201 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<!--CHATBOT  -->
+<script>
+    // Lista de preguntas frecuentes y sus respuestas
+    const preguntasFrecuentes = [
+    {
+        preguntas: ['ansiedad', 'tengo ansiedad', 'qué hago si tengo ansiedad'],
+        respuesta: '🔵 **Ayuda inmediata:**\n1. Respiración 4-7-8 (inhala 4 seg, mantén 7, exhala 8)\n2. Enfría tus muñecas con agua fría\n3. Repite: "Esto es temporal, estoy a salvo"\n\n🟢 **Solución a largo plazo:**\n• Terapia cognitivo-conductual\n• Ejercicio aeróbico 3x/semana\n• Reducir cafeína'
+      },
+      {
+        preguntas: ['cómo controlar la ansiedad', 'formas de controlar la ansiedad'],
+        respuesta: '🟡 **Técnica rápida ahora mismo:**\n1. Nombra 5 objetos que ves\n2. Aprieta tus puños por 5 segundos y suelta\n3. Bebe agua lentamente\n\n🔵 **Para prevenir:**\n• Registra tus detonantes en un diario\n• Practica mindfulness 5 min/día'
+      },
+      {
+        preguntas: ['depresión', 'estoy deprimido', 'me siento muy triste'],
+        respuesta: '⚠️ **Acciones hoy:**\n1. Da un paseo corto aunque no tengas ganas\n2. Escribe 1 logro (por pequeño que sea)\n3. Contacta a un ser querido\n\n🟢 **Siguientes pasos:**\n• Agenda cita con psicólogo/psiquiatra\n• Establece rutina de sueño'
+      },
+      {
+        preguntas: ['síntomas de la depresión', 'cómo saber si tengo depresión'],
+        respuesta: '🔴 **Si experimentas:**\n• Tristeza persistente + 4 de estos:\n1. Pérdida de interés\n2. Cambios de apetito\n3. Insomnio/hipersomnia\n4. Fatiga\n5. Sentimientos de inutilidad\n\n🟡 **Qué hacer hoy:**\n• Programa evaluación profesional\n• Evita aislarte (aunque sea por videollamada)'
+      },
+      {
+        preguntas: ['autoestima', 'cómo mejorar la autoestima'],
+        respuesta: '🌟 **Ejercicio urgente:**\n1. Escribe 3 cualidades tuyas\n2. Haz 1 cosa que pospones (ej: ordenar tu mesa)\n3. Vístete como si fueras tu "mejor versión"\n\n🟢 **Para mejorar:**\n• Terapia de aceptación\n• Lista diaria de micrologros'
+      },
+      {
+        preguntas: ['estrés', 'cómo manejar el estrés'],
+        respuesta: '🧠 **Alivio rápido:**\n1. Masajea tus sienes con movimientos circulares\n2. Escucha música instrumental\n3. Escribe todo lo que tienes en mente\n\n⚡ **Prevención:**\n• Técnica Pomodoro (25min trabajo/5min descanso)\n• Delegar tareas'
+      },
+      {
+        preguntas: ['estrés crónico'],
+        respuesta: '🚨 **Hoy mismo:**\n1. Identifica 1 fuente de estrés evitable\n2. Practica respiración diafragmática\n3. Baño con sales de Epsom (20 min)\n\n💡 **Cambios necesarios:**\n• Revisa tu carga laboral\n• Aprende a decir "no"'
+      },
+      {
+        preguntas: ['trastornos de ansiedad'],
+        respuesta: '🆘 **Primeros auxilios:**\n1. Ancla tus pies firmemente al suelo\n2. Observa tu entorno y describe 3 texturas\n3. Chupa un cubo de hielo\n\n📅 **Tratamiento:**\n• Terapia + posible medicación\n• Exposición gradual'
+      },
+      {
+        preguntas: ['métodos de relajación', 'cómo relajarme', 'quiero relajarme'],
+        respuesta: '🌿 **Prueba ahora:**\n1. Tensa y relaja cada grupo muscular (pies a cabeza)\n2. Visualiza un lugar seguro\n3. Humor: mira un meme divertido\n\n🧘 **Rutina ideal:**\n• Yoga 3x/semana\n• Respiración cuadrada (4-4-4-4)'
+      },
+      {
+        preguntas: ['insomnio', 'no puedo dormir', 'me cuesta dormir'],
+        respuesta: '🌙 **Esta noche:**\n1. Baño caliente 1h antes de dormir\n2. Té de manzanilla sin pantallas\n3. Temperatura ambiente 18-20°C\n\n🚫 **Evita:**\n• Cafeína después del mediodía\n• Siestas >20min'
+      },
+      {
+        preguntas: ['pánico', 'ataque de pánico'],
+        respuesta: '🆘 **Durante el ataque:**\n1. Cronométrale (suele durar <30min)\n2. Mira fotos de seres queridos\n3. Mastica chicle fuerte\n\n📉 **Post-crisis:**\n• Bebe agua con limón\n• Descansa en posición fetal'
+      },
+      {
+        preguntas: ['tristeza', 'me siento triste'],
+        respuesta: '💙 **Hoy:**\n1. Llora si lo necesitas (liberador)\n2. Abraza a tu mascota/almohada\n3. Escucha música melancólica (catarsis)\n\n🌤 **Para mañana:**\n• Exposición a luz solar\n• Actividad social mínima'
+      },
+      {
+        preguntas: ['suicidio', 'quiero morir', 'no quiero vivir'],
+        respuesta: '🚨 **URGENTE:**\n1. Llama a línea de prevención AHORA\n2. Quédate con alguien (no solo)\n3. Posterga decisiones\n\n💛 **Recuerda:**\n• El dolor ES temporal\n• Hay opciones que no has probado'
+      },
+      {
+        preguntas: ['autolesiones', 'quiero hacerme daño'],
+        respuesta: '🆘 **Alternativas ahora:**\n1. Dibuja en tu piel con marcador rojo\n2. Aprieta cubitos de hielo\n3. Corre en el lugar hasta el agotamiento\n\n❤️ **A largo plazo:**\n• Terapia dialéctica\n• Identificar desencadenantes'
+      },
+      {
+        preguntas: ['trauma', 'he vivido un trauma'],
+        respuesta: '🛡 **Estabilización:**\n1. Objeto de grounding (piedra lisa, peluche)\n2. Lista de lugares seguros actuales\n3. Movimientos bilaterales (balanceo)\n\n🔐 **Procesamiento:**\n• Solo con terapeuta especializado\n• EMDR o somática'
+      },
+
+    {
+        pregunta: 'qué es la ansiedad',
+        respuesta: 'La ansiedad es un mecanismo de defensa natural del organismo que nos prepara para responder ante amenazas reales o percibidas. \n\n🔍 **Componentes principales:**\n' +
+                   '• **Físicos:** Taquicardia, sudoración, tensión muscular, mareos\n' +
+                   '• **Emocionales:** Miedo intenso, sensación de peligro inminente\n' +
+                   '• **Cognitivos:** Pensamientos catastróficos ("voy a morir/enloquecer")\n' +
+                   '• **Conductuales:** Evitación de situaciones temidas\n\n' +
+                   '💡 Se considera trastorno cuando persiste +6 meses e interfiere con la vida diaria.'
+      },
+      {
+        pregunta:  'que es la depresión',
+        respuesta: 'La depresión es un trastorno del estado de ánimo que afecta químicamente al cerebro. \n\n🔍 **Características clave:**\n' +
+                   '• Estado de ánimo deprimido casi todo el día\n' +
+                   '• Pérdida de interés en actividades placenteras\n' +
+                   '• Alteraciones en sueño y apetito\n' +
+                   '• Fatiga crónica y dificultad para concentrarse\n\n' +
+                   '⚠️ Requiere diagnóstico profesional cuando dura +2 semanas.'
+      },
+      {
+        pregunta: 'qué es el estrés',
+        respuesta: 'El estrés es una respuesta fisiológica normal ante demandas externas. \n\n🔍 **Tipos:**\n' +
+                   '• **Agudo:** Respuesta puntual útil para el rendimiento\n' +
+                   '• **Crónico:** Estado prolongado que daña la salud\n\n' +
+                   '🔄 **Fases (Síndrome General de Adaptación):**\n' +
+                   '1. Alarma\n' +
+                   '2. Resistencia\n' +
+                   '3. Agotamiento'
+      },
+      {
+        pregunta: 'qué es un ataque de pánico',
+        respuesta: 'Un ataque de pánico es un episodio súbito de miedo intenso sin peligro real. \n\n🔍 **Síntomas característicos:**\n' +
+                   '• Palpitaciones y dolor torácico\n' +
+                   '• Sensación de ahogo o asfixia\n' +
+                   '• Miedo a perder el control o morir\n' +
+                   '• Desrealización (sentirse fuera de sí)\n\n' +
+                   '⏱ Suele alcanzar su pico en 10 minutos.'
+      },
+      {
+        pregunta: 'qué es la autoestima',
+        respuesta: 'La autoestima es la valoración subjetiva que hacemos de nosotros mismos. \n\n🔍 **Componentes:**\n' +
+                   '• **Autoeficacia:** Confianza en nuestras capacidades\n' +
+                   '• **Autodignidad:** Merecimiento de respeto y amor\n\n' +
+                   '📈 Se construye mediante:\n' +
+                   '• Logros realistas\n' +
+                   '• Autocompasión\n' +
+                   '• Relaciones saludables'
+      },
+      {
+        pregunta: 'qué es el trauma psicológico',
+        respuesta: 'El trauma es una herida emocional causada por eventos que sobrepasan los mecanismos de afrontamiento. \n\n🔍 **Tipos:**\n' +
+                   '• **Trauma T:** Evento único (accidente, desastre)\n' +
+                   '• **Trauma t:** Experiencias prolongadas (abuso, negligencia)\n\n' +
+                   '🧠 **Efectos neurológicos:**\n' +
+                   '• Hiperactivación de la amígdala\n' +
+                   '• Dificultad para regular emociones'
+      },
+      {
+        pregunta: 'qué son los trastornos alimentarios',
+        respuesta: 'Son enfermedades mentales graves caracterizadas por conductas alimentarias peligrosas. \n\n🔍 **Principales tipos:**\n' +
+                   '• **Anorexia nerviosa:** Restricción extrema de alimentos\n' +
+                   '• **Bulimia nerviosa:** Ciclos de atracones-purga\n' +
+                   '• **Trastorno por atracón:** Consumo compulsivo sin compensación\n\n' +
+                   '⚠️ Requieren tratamiento multidisciplinario (médico, nutricional, psicológico).'
+      },
+      {
+        pregunta: 'qué es el TOC',
+        respuesta: 'El Trastorno Obsesivo-Compulsivo (TOC) es una condición psiquiátrica caracterizada por:\n\n🔍 **Obsesiones:**\n' +
+                   '• Pensamientos intrusivos recurrentes\n' +
+                   '• Imágenes no deseadas\n\n' +
+                   '🔍 **Compulsiones:**\n' +
+                   '• Conductas repetitivas (lavado, verificación)\n' +
+                   '• Actos mentales (contar, rezar)\n\n' +
+                   '🔄 El ciclo obsesión-ansiedad-compulsión-alivio mantiene el trastorno.'
+      },
+      {
+        pregunta: 'qué es el burnout',
+        respuesta: 'El síndrome de burnout es un estado de agotamiento laboral crónico. \n\n🔍 **Tres dimensiones (Maslach):**\n' +
+                   '1. Agotamiento emocional\n' +
+                   '2. Despersonalización (actitud cínica)\n' +
+                   '3. Reducida realización personal\n\n' +
+                   '💼 Difiere de la depresión por su relación específica con el trabajo.'
+      },
+      {
+        pregunta: 'qué es la terapia psicológica',
+        respuesta: 'La terapia es un proceso estructurado para aliviar el malestar psicológico y promover el crecimiento. \n\n🔍 **Enfoques principales:**\n' +
+                   '• **Cognitivo-Conductual (TCC):** Modifica pensamientos y conductas\n' +
+                   '• **Psicodinámica:** Explora patrones inconscientes\n' +
+                   '• **Humanista:** Enfocada en autorrealización\n\n' +
+                   '⏳ Suele requerir entre 10-20 sesiones para ver resultados.'
+      }
+  ];
+    
+
+  function toggleChat() {
+    const chat = document.getElementById('chat-window');
+    chat.style.display = chat.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function sendMessage() {
+    const input = document.getElementById('user-input');
+    const chatBody = document.getElementById('chat-body');
+    const msg = input.value.trim();
+
+    if (!msg) return;
+
+    // Mostrar mensaje del usuario
+    chatBody.innerHTML += `<div><strong>Tú:</strong> ${msg}</div>`;
+
+    let response = 'Lo siento, no tengo información sobre eso aún.';
+
+    preguntasFrecuentes.forEach(item => {
+      if (item.preguntas) {
+        item.preguntas.forEach(preg => {
+          if (msg.toLowerCase() === preg.toLowerCase()) {
+            response = item.respuesta;
+          }
+        });
+      } else if (item.pregunta) {
+        if (msg.toLowerCase() === item.pregunta.toLowerCase()) {
+          response = item.respuesta;
+        }
+      }
+    });
+
+    chatBody.innerHTML += `<div><strong>Bot:</strong> ${response}</div>`;
+    input.value = '';
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+    </script>
+    
 </body>
 </html>

@@ -9,6 +9,13 @@ from ..extensions import db  # Asegúrate de que extensions.py contiene "db = SQ
 from .utils import juegos, obtener_conteo_emociones_por_fecha, obtener_emociones_por_fecha, obtener_profesionales_disponibles, obtener_especialidad_profesional, obtener_nombre_profesional
 from ..models import Emocion, Consulta, FamiliaGratitud
 from ..auth.utils import login_required
+import os
+import requests
+from dotenv import load_dotenv
+
+load_dotenv()
+HF_TOKEN = os.getenv("HF_TOKEN")
+
 
 
 user_bp = Blueprint('user', __name__)
@@ -375,3 +382,8 @@ def eliminar_consulta(id):
         flash(f'Error al eliminar la cita: {str(e)}', 'error')
     
     return redirect(url_for('user.consultas_dia'))
+
+
+
+# chatbot
+

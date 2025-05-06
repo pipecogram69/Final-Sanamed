@@ -370,3 +370,82 @@ a {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
+
+
+/* Botón flotante más grande y más arriba */
+#chatbot-button {
+    position: fixed;
+    bottom: 60px;
+    right: 50px;
+    cursor: pointer;
+    z-index: 1000;
+    width: 80px;           /* Aumenté un poco más el tamaño para que quepa la imagen */
+    height: 80px;
+    border-radius: 50%;    /* Hace que el botón tenga forma circular */
+    overflow: hidden;      /* Oculta cualquier parte de la imagen que se salga */
+    background-color: white; /* Fondo por si la imagen no llena completamente */
+    box-shadow: 0 0 8px rgba(0,0,0,0.2); /* Opcional: sombra para que resalte */
+  }
+  
+  #chatbot-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;     /* Asegura que la imagen se recorte sin deformarse */
+  }
+  
+  
+  /* Ventana del chat */
+  #chat-window {
+    position: fixed;
+    bottom: 100px;       /* Lo subí un poco más, cambiando de 80px a 100px */
+    right: 30px;         /* Lo moví un poco más a la izquierda (anteriormente estaba en 20px) */
+    width: 250px;        /* Ancho del chat */
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: none;       /* Inicialmente oculto */
+  }
+  
+  #chat-header {
+    background: #8DCB9E;  /* Color de fondo del encabezado */
+    color: white;          /* Color del texto */
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  #chat-body {
+    height: 200px;         /* Altura del cuerpo del chat */
+    overflow-y: auto;      /* Hace scroll si hay más mensajes */
+    padding: 10px;
+  }
+  
+  #chat-footer {
+    display: flex;
+    padding: 10px;
+  }
+  
+  #chat-footer input {
+    flex: 1;               /* Hace que el input ocupe el espacio restante */
+    padding: 5px;
+  }
+  
+  #chat-footer button {
+    margin-left: 5px;
+    padding: 3px 4px;     /* Tamaño del botón */
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #25D366; /* Color del botón */
+    color: white;
+    border: none;
+  }
+  
+  #chat-footer button:hover {
+    background-color: #128C7E; /* Cambio de color cuando pasa el ratón */
+  }
+  
