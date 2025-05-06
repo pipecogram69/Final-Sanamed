@@ -203,31 +203,31 @@ document.addEventListener('DOMContentLoaded', function() {
     // Lista de preguntas frecuentes y sus respuestas
     const preguntasFrecuentes = [
     {
-        preguntas: ['ansiedad', 'tengo ansiedad', 'qué hago si tengo ansiedad'],
+        preguntas: ['ansiedad', 'tengo ansiedad', 'que hago si tengo ansiedad'],
         respuesta: '🔵 **Ayuda inmediata:**\n1. Respiración 4-7-8 (inhala 4 seg, mantén 7, exhala 8)\n2. Enfría tus muñecas con agua fría\n3. Repite: "Esto es temporal, estoy a salvo"\n\n🟢 **Solución a largo plazo:**\n• Terapia cognitivo-conductual\n• Ejercicio aeróbico 3x/semana\n• Reducir cafeína'
       },
       {
-        preguntas: ['cómo controlar la ansiedad', 'formas de controlar la ansiedad'],
+        preguntas: ['como controlar la ansiedad', 'formas de controlar la ansiedad'],
         respuesta: '🟡 **Técnica rápida ahora mismo:**\n1. Nombra 5 objetos que ves\n2. Aprieta tus puños por 5 segundos y suelta\n3. Bebe agua lentamente\n\n🔵 **Para prevenir:**\n• Registra tus detonantes en un diario\n• Practica mindfulness 5 min/día'
       },
       {
-        preguntas: ['depresión', 'estoy deprimido', 'me siento muy triste'],
+        preguntas: ['depresion', 'estoy deprimido', 'me siento muy triste'],
         respuesta: '⚠️ **Acciones hoy:**\n1. Da un paseo corto aunque no tengas ganas\n2. Escribe 1 logro (por pequeño que sea)\n3. Contacta a un ser querido\n\n🟢 **Siguientes pasos:**\n• Agenda cita con psicólogo/psiquiatra\n• Establece rutina de sueño'
       },
       {
-        preguntas: ['síntomas de la depresión', 'cómo saber si tengo depresión'],
+        preguntas: ['sintomas de la depresion', 'como saber si tengo depresion'],
         respuesta: '🔴 **Si experimentas:**\n• Tristeza persistente + 4 de estos:\n1. Pérdida de interés\n2. Cambios de apetito\n3. Insomnio/hipersomnia\n4. Fatiga\n5. Sentimientos de inutilidad\n\n🟡 **Qué hacer hoy:**\n• Programa evaluación profesional\n• Evita aislarte (aunque sea por videollamada)'
       },
       {
-        preguntas: ['autoestima', 'cómo mejorar la autoestima'],
+        preguntas: ['autoestima', 'como mejorar la autoestima'],
         respuesta: '🌟 **Ejercicio urgente:**\n1. Escribe 3 cualidades tuyas\n2. Haz 1 cosa que pospones (ej: ordenar tu mesa)\n3. Vístete como si fueras tu "mejor versión"\n\n🟢 **Para mejorar:**\n• Terapia de aceptación\n• Lista diaria de micrologros'
       },
       {
-        preguntas: ['estrés', 'cómo manejar el estrés'],
+        preguntas: ['estres', 'cómo manejar el estres'],
         respuesta: '🧠 **Alivio rápido:**\n1. Masajea tus sienes con movimientos circulares\n2. Escucha música instrumental\n3. Escribe todo lo que tienes en mente\n\n⚡ **Prevención:**\n• Técnica Pomodoro (25min trabajo/5min descanso)\n• Delegar tareas'
       },
       {
-        preguntas: ['estrés crónico'],
+        preguntas: ['estres cronico'],
         respuesta: '🚨 **Hoy mismo:**\n1. Identifica 1 fuente de estrés evitable\n2. Practica respiración diafragmática\n3. Baño con sales de Epsom (20 min)\n\n💡 **Cambios necesarios:**\n• Revisa tu carga laboral\n• Aprende a decir "no"'
       },
       {
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
         respuesta: '🆘 **Primeros auxilios:**\n1. Ancla tus pies firmemente al suelo\n2. Observa tu entorno y describe 3 texturas\n3. Chupa un cubo de hielo\n\n📅 **Tratamiento:**\n• Terapia + posible medicación\n• Exposición gradual'
       },
       {
-        preguntas: ['métodos de relajación', 'cómo relajarme', 'quiero relajarme'],
+        preguntas: ['metodos de relajacion', 'como relajarme', 'quiero relajarme'],
         respuesta: '🌿 **Prueba ahora:**\n1. Tensa y relaja cada grupo muscular (pies a cabeza)\n2. Visualiza un lugar seguro\n3. Humor: mira un meme divertido\n\n🧘 **Rutina ideal:**\n• Yoga 3x/semana\n• Respiración cuadrada (4-4-4-4)'
       },
       {
@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
       },
 
     {
-        pregunta: 'qué es la ansiedad',
+        pregunta: 'que es la ansiedad', 
         respuesta: 'La ansiedad es un mecanismo de defensa natural del organismo que nos prepara para responder ante amenazas reales o percibidas. \n\n🔍 **Componentes principales:**\n' +
                    '• **Físicos:** Taquicardia, sudoración, tensión muscular, mareos\n' +
                    '• **Emocionales:** Miedo intenso, sensación de peligro inminente\n' +
@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
                    '💡 Se considera trastorno cuando persiste +6 meses e interfiere con la vida diaria.'
       },
       {
-        pregunta:  'que es la depresión',
+        pregunta:  'que es la depresion',
         respuesta: 'La depresión es un trastorno del estado de ánimo que afecta químicamente al cerebro. \n\n🔍 **Características clave:**\n' +
                    '• Estado de ánimo deprimido casi todo el día\n' +
                    '• Pérdida de interés en actividades placenteras\n' +
@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', function() {
                    '⚠️ Requiere diagnóstico profesional cuando dura +2 semanas.'
       },
       {
-        pregunta: 'qué es el estrés',
+        pregunta: 'que es el estres',
         respuesta: 'El estrés es una respuesta fisiológica normal ante demandas externas. \n\n🔍 **Tipos:**\n' +
                    '• **Agudo:** Respuesta puntual útil para el rendimiento\n' +
                    '• **Crónico:** Estado prolongado que daña la salud\n\n' +
@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function() {
                    '3. Agotamiento'
       },
       {
-        pregunta: 'qué es un ataque de pánico',
+        pregunta: 'que es un ataque de panico',
         respuesta: 'Un ataque de pánico es un episodio súbito de miedo intenso sin peligro real. \n\n🔍 **Síntomas característicos:**\n' +
                    '• Palpitaciones y dolor torácico\n' +
                    '• Sensación de ahogo o asfixia\n' +
@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function() {
                    '⏱ Suele alcanzar su pico en 10 minutos.'
       },
       {
-        pregunta: 'qué es la autoestima',
+        pregunta: 'que es la autoestima',
         respuesta: 'La autoestima es la valoración subjetiva que hacemos de nosotros mismos. \n\n🔍 **Componentes:**\n' +
                    '• **Autoeficacia:** Confianza en nuestras capacidades\n' +
                    '• **Autodignidad:** Merecimiento de respeto y amor\n\n' +
@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function() {
                    '• Relaciones saludables'
       },
       {
-        pregunta: 'qué es el trauma psicológico',
+        pregunta: 'que es el trauma psicológico',
         respuesta: 'El trauma es una herida emocional causada por eventos que sobrepasan los mecanismos de afrontamiento. \n\n🔍 **Tipos:**\n' +
                    '• **Trauma T:** Evento único (accidente, desastre)\n' +
                    '• **Trauma t:** Experiencias prolongadas (abuso, negligencia)\n\n' +
@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
                    '• Dificultad para regular emociones'
       },
       {
-        pregunta: 'qué son los trastornos alimentarios',
+        pregunta: 'que son los trastornos alimentarios',
         respuesta: 'Son enfermedades mentales graves caracterizadas por conductas alimentarias peligrosas. \n\n🔍 **Principales tipos:**\n' +
                    '• **Anorexia nerviosa:** Restricción extrema de alimentos\n' +
                    '• **Bulimia nerviosa:** Ciclos de atracones-purga\n' +
@@ -328,7 +328,7 @@ document.addEventListener('DOMContentLoaded', function() {
                    '⚠️ Requieren tratamiento multidisciplinario (médico, nutricional, psicológico).'
       },
       {
-        pregunta: 'qué es el TOC',
+        pregunta: 'que es el TOC',
         respuesta: 'El Trastorno Obsesivo-Compulsivo (TOC) es una condición psiquiátrica caracterizada por:\n\n🔍 **Obsesiones:**\n' +
                    '• Pensamientos intrusivos recurrentes\n' +
                    '• Imágenes no deseadas\n\n' +
@@ -338,7 +338,7 @@ document.addEventListener('DOMContentLoaded', function() {
                    '🔄 El ciclo obsesión-ansiedad-compulsión-alivio mantiene el trastorno.'
       },
       {
-        pregunta: 'qué es el burnout',
+        pregunta: 'que es el burnout',
         respuesta: 'El síndrome de burnout es un estado de agotamiento laboral crónico. \n\n🔍 **Tres dimensiones (Maslach):**\n' +
                    '1. Agotamiento emocional\n' +
                    '2. Despersonalización (actitud cínica)\n' +
@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded', function() {
                    '💼 Difiere de la depresión por su relación específica con el trabajo.'
       },
       {
-        pregunta: 'qué es la terapia psicológica',
+        pregunta: 'que es la terapia psicológica',
         respuesta: 'La terapia es un proceso estructurado para aliviar el malestar psicológico y promover el crecimiento. \n\n🔍 **Enfoques principales:**\n' +
                    '• **Cognitivo-Conductual (TCC):** Modifica pensamientos y conductas\n' +
                    '• **Psicodinámica:** Explora patrones inconscientes\n' +
@@ -387,7 +387,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    chatBody.innerHTML += `<div><strong>Bot:</strong> ${response}</div>`;
+    chatBody.innerHTML += `<div><strong>SANAMED:</strong> ${response}</div>`;
     input.value = '';
     chatBody.scrollTop = chatBody.scrollHeight;
   }
