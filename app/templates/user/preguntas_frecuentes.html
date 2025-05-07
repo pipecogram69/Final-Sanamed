@@ -12,10 +12,10 @@
 <body>
         <h1 class="titulo-centrado">SANAMED</h1>
         <img src="{{ url_for('static', filename='auth/rectangle 6.png') }}" alt="Imagen Superior" class="imagen-superior">
-        <img src="{{ url_for('static', filename='auth/saludmental1.png') }}" alt="Imagen Esquina Izquierda" class="imagen-esquina izquierda">
+        <img src="{{ url_for('static', filename='auth/saludmental1.png') }}" alt="Imagen Esquina Izquierda" class="imagen-esquinai izquierda">
     
         <div class="menu-container">
-            <img src="{{ url_for('static', filename='auth/saludmental1.png') }}" alt="Imagen Esquina Derecha" class="imagen-esquina derecha" id="menu-toggle">
+            <img src="{{ url_for('static', filename='auth/saludmental1.png') }}" alt="Imagen Esquina Derecha" class="imagen-esquinad derecha" id="menu-toggle">
             <div class="menu-dropdown" id="menu-dropdown">
                 <a href="{{ url_for('user.user_home') }}">Home</a>
                 <a href="{{ url_for('user.configuracion') }}">Configuración</a>
@@ -66,7 +66,7 @@
                 
                     // Cerrar el menú si se hace clic fuera de él
                     window.addEventListener('click', function(event) {
-                        if (!event.target.matches('.imagen-esquina')) {
+                        if (!event.target.matches('.imagen-esquinad')) {
                             if (menuDropdown.classList.contains('show')) {
                                 menuDropdown.classList.remove('show');
                             }
