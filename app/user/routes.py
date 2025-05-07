@@ -310,7 +310,7 @@ def seleccionar_dia():
     
     if not emociones:
         flash(f"No hay emociones registradas para el {fecha_seleccionada.strftime('%d/%m/%Y')}", "info")
-        return redirect(url_for('mostrar_calendario'))
+        return redirect(url_for('user.mostrar_calendario'))
     
     return render_template('user/emociones.html', 
                          emociones=emociones,
