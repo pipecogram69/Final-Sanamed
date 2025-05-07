@@ -98,8 +98,9 @@ def register():
 
 @auth_bp.route('/logout')
 def logout():
-    """Cierra la sesión del usuario."""
+    """Cierra la sesión del usuario y muestra un mensaje flash."""
     session.clear()
+    flash('Has cerrado sesión correctamente.', 'success')  # 'success' es la categoría del mensaje
     response = redirect(url_for('auth.index'))
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     response.headers['Pragma'] = 'no-cache'
