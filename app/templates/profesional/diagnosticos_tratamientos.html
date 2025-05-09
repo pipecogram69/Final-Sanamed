@@ -69,7 +69,7 @@
                         <td>{{ consulta.hora_consulta }}</td>
                         <td>{{ consulta.motivo }}</td>
                         <td>
-                            <form action="{{ url_for('editar_diagnostico_tratamiento', id_consulta=consulta.id_consulta) }}" method="post">
+                            <form action="{{ url_for('profesional.editar_diagnostico_tratamiento', id_consulta=consulta.id_consulta) }}" method="post">
                                 <input type="text" name="diagnostico" value="{{ consulta.diagnostico }}" class="styled-input">
                         </td>
                         <td>
