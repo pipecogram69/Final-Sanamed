@@ -416,19 +416,54 @@ function animarCirculo(instruccion, duracion) {
     }
 }
 
-// Cuando el usuario hace clic en el botón "Añadir al jardín"
-document.getElementById('agregar-gratitud').addEventListener('click', function() {
-    const gratitud = document.getElementById('input-gratitud').value.trim();
-    if (gratitud.length < 3) {
-        alert('Por favor escribe al menos 3 caracteres');
-        return;
+// Reemplaza todo el JavaScript anterior con este código corregido
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Cargar gratitudes al iniciar
+    cargarGratitudesDesdeBaseDeDatos();
+    
+    // Configurar el textarea para permitir escritura
+    const textarea = document.getElementById('input-gratitud');
+    if (textarea) {
+        // Asegurarse que el textarea esté habilitado
+        textarea.disabled = false;
+        textarea.readOnly = false;
+        textarea.style.pointerEvents = 'auto';
+        
+        // Permitir escribir normalmente
+        textarea.addEventListener('keydown', function(e) {
+            // No prevenir el comportamiento por defecto
+            // Solo manejar Enter para enviar
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                document.getElementById('agregar-gratitud').click();
+            }
+        });
+    } else {
+        console.error('No se encontró el textarea con ID input-gratitud');
     }
-    if (gratitud.length > 500) {
-        alert('Máximo 500 caracteres');
-        return;
+    
+    // Configurar el botón de agregar
+    const agregarBtn = document.getElementById('agregar-gratitud');
+    if (agregarBtn) {
+        agregarBtn.addEventListener('click', function() {
+            const gratitud = textarea.value.trim();
+            
+            if (gratitud.length < 3) {
+                alert('Por favor escribe al menos 3 caracteres');
+                return;
+            }
+            if (gratitud.length > 500) {
+                alert('Máximo 500 caracteres permitidos');
+                return;
+            }
+            
+            guardarGratitudEnBaseDeDatos(gratitud);
+        });
     }
-    guardarGratitudEnBaseDeDatos(gratitud);
 });
+
+// Resto de las funciones permanecen igual (guardarGratitudEnBaseDeDatos, agregarFlorAlJardin, etc.)
 
 // Función para agregar una flor visualmente al jardín
 function agregarFlorAlJardin(gratitudData) {

@@ -10,5 +10,5 @@ Profesionales (nombre, especialidad, correo, contrasena)
 ##############################################################################
 
 
- Administradores (nombre, correo, contrasena) 
+  Administradores (nombre, correo, contrasena) 
 ('Maria Jose Fonseca', 'mjfonseca19@gmail.com', 'Majo123*');

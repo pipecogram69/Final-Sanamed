@@ -105,10 +105,15 @@ def agregar_gratitud():
         return jsonify({'error': 'No autenticado'}), 401
 
     data = request.get_json()
+    if not data:
+        return jsonify({'error': 'Datos no proporcionados'}), 400
+        
     gratitud = data.get('gratitud', '').strip()
     
     if not gratitud:
         return jsonify({'error': 'El texto de gratitud no puede estar vacío'}), 400
+    if len(gratitud) > 500:
+        return jsonify({'error': 'Máximo 500 caracteres permitidos'}), 400
 
     try:
         nueva_gratitud = FamiliaGratitud(
@@ -119,7 +124,9 @@ def agregar_gratitud():
         db.session.commit()
         return jsonify({
             'message': 'Gratitud agregada',
-            'id_gratitud': nueva_gratitud.id_gratitud
+            'id_gratitud': nueva_gratitud.id_gratitud,
+            'texto': nueva_gratitud.gratitud,
+            'fecha': nueva_gratitud.fecha.isoformat()
         }), 201
     except Exception as e:
         db.session.rollback()
@@ -164,7 +171,6 @@ def cargar_gratitudes():
             'fecha': g.fecha.isoformat()
         } for g in gratitudes]
     }), 200
-    
     
     
 @user_bp.route('/agendar_cita', methods=["GET", "POST"])
