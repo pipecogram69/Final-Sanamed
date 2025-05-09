@@ -1,0 +1,14 @@
+
+Profesionales (nombre, especialidad, correo, contrasena) 
+('Ana López', 'Psicología Clínica y de la Salud', 'ana@gmail.com', 'Anital12*'),
+('Luis Martínez', 'Psicología Educativa', 'luis@gmail.com', 'Luisito00.'),
+('Elena Sánchez', 'Psicología Cognitiva', 'elena@gmail.com', 'Elen9696.'),
+('Mario García', 'Neuropsicología', 'mario@gmail.com', 'Mariob15.'),
+('Sara Rodríguez', 'Psicología Biológica', 'sara@gmail.com', 'Sarara89.');
+
+
+##############################################################################
+
+
+ Administradores (nombre, correo, contrasena) 
+('Maria Jose Fonseca', 'mjfonseca19@gmail.com', 'Majo123*');
