@@ -515,7 +515,7 @@ function obtenerColorAleatorio() {
 }
 // Guardar la gratitud en la base de datos
 function guardarGratitudEnBaseDeDatos(gratitud) {
-    fetch('user/agregar_gratitud', {
+    fetch('/user/agregar_gratitud', {  // ✅ ruta corregida
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -546,9 +546,9 @@ function guardarGratitudEnBaseDeDatos(gratitud) {
 
 // Eliminar la flor de la base de datos
 function eliminarFlorDeBaseDeDatos(idGratitud) {
-    fetch(`/eliminar_gratitud/${idGratitud}`, {
+    fetch(`/user/eliminar_gratitud/${idGratitud}`, {  // ✅ ruta corregida
         method: 'DELETE',
-        credentials: 'include' // Para incluir la cookie de sesión
+        credentials: 'include'
     })
     .then(response => response.json())
     .then(data => {
@@ -564,13 +564,9 @@ function eliminarFlorDeBaseDeDatos(idGratitud) {
 }
 
 // Cargar gratitudes al iniciar la página
-document.addEventListener('DOMContentLoaded', function() {
-    cargarGratitudesDesdeBaseDeDatos();
-});
-
 function cargarGratitudesDesdeBaseDeDatos() {
-    fetch('/cargar_gratitudes', {
-        credentials: 'include' // Para incluir la cookie de sesión
+    fetch('/user/cargar_gratitudes', {  // ✅ ruta corregida
+        credentials: 'include'
     })
     .then(response => response.json())
     .then(data => {

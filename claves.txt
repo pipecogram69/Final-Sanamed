@@ -12,3 +12,11 @@ Profesionales (nombre, especialidad, correo, contrasena)
 
   Administradores (nombre, correo, contrasena) 
 ('Maria Jose Fonseca', 'mjfonseca19@gmail.com', 'Majo123*');
+
+
+
+##############################################################################
+
+con esto se descargan todas las librerias del proyecto 
+
+pip install -r requirements.txt
