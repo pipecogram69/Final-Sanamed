@@ -1,26 +1,37 @@
-🧠 Proyecto Salud Mental - Chatbot y Gestión de Citas
-Este es un proyecto web desarrollado con Python, Flask, HTML/CSS y MongoDB, diseñado para ofrecer orientación sobre salud mental mediante un chatbot inteligente, además de facilitar la gestión de citas con profesionales especializados.
+# 🧠 Proyecto Salud Mental - Chatbot y Gestión de Citas
 
-🧩 Funcionalidades
-🤖 Chatbot de salud mental: Respuestas automáticas ante preguntas sobre ansiedad, depresión, estrés, autoestima, entre otros temas.
+Este es un proyecto web desarrollado con **Python**, **Flask**, **HTML/CSS** y **MongoDB**, diseñado para ofrecer orientación sobre salud mental mediante un **chatbot inteligente**, además de facilitar la **gestión de citas** con profesionales especializados.
 
-📚 Reconocimiento de variantes: Manejo de múltiples formas de preguntar para mejorar la precisión de respuestas.
+---
 
-👥 Gestión de profesionales: Registro, edición y visualización de psicólogos y profesionales de la salud mental.
+## 🧩 Funcionalidades
 
-📆 Citas médicas: Agendamiento, modificación y cancelación de citas con profesionales.
+- 🤖 **Chatbot de salud mental**  
+  Respuestas automáticas ante preguntas sobre ansiedad, depresión, estrés, autoestima, entre otros temas.
 
-👤 Roles de usuario: Acceso diferenciado para usuarios y administradores.
+- 📚 **Reconocimiento de variantes**  
+  Manejo de múltiples formas de preguntar para mejorar la precisión de las respuestas.
 
-💬 Mensajes informativos: Notificaciones tipo flash al interactuar con el sistema.
+- 👥 **Gestión de profesionales**  
+  Registro, edición y visualización de psicólogos y profesionales de la salud mental.
 
-📱 Diseño responsive: Adaptado para computadoras, tablets y móviles.
+- 📆 **Citas médicas**  
+  Agendamiento, modificación y cancelación de citas con profesionales.
 
-⚙️ Tecnologías utilizadas
-Backend: Python, Flask
+- 👤 **Roles de usuario**  
+  Acceso diferenciado para usuarios y administradores.
 
-Frontend: HTML5, CSS3
+- 💬 **Mensajes informativos**  
+  Notificaciones tipo flash al interactuar con el sistema.
 
-Base de datos: PostgreSQL
+- 📱 **Diseño responsive**  
+  Adaptado para computadoras, tablets y dispositivos móviles.
 
-Control de versiones: Git y GitHub
+---
+
+## ⚙️ Tecnologías utilizadas
+
+- **Backend:** Python, Flask  
+- **Frontend:** HTML5, CSS3  
+- **Base de datos:** PostgreSQL
+- **Control de versiones:** Git y GitHub
