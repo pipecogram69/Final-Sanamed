@@ -1,4 +1,4 @@
-# 🧠 Proyecto Salud Mental - Chatbot y Gestión de Citas
+# 🧠 Proyecto Salud Mental - 
 
 Este es un proyecto web desarrollado con **Python**, **Flask**, **HTML/CSS** y **MongoDB**, diseñado para ofrecer orientación sobre salud mental mediante un **chatbot inteligente**, además de facilitar la **gestión de citas** con profesionales especializados.
 
